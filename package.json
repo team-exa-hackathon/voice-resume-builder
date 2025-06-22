@@ -1,0 +1,25 @@
+{
+  "name": "riz",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pdfjs-dist": "^5.3.31",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "description": "",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.5.2",
+    "vite": "^6.3.5",
+    "vitest": "^1.4.0"
+  }
+}

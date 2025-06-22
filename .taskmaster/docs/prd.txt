@@ -1,0 +1,43 @@
+Conversational Résumé Screener (Idea #2)
+• Core demo: upload a PDF résumé and ask “what should I improve?”; agent speaks actionable feedback.
+• Stack: File upload + pdf.js → GPT résumé-review prompt → speech-synthesis.
+• Memory: persist last versions & feedback in IndexedDB.
+
+Example interaction — Conversational Résumé Screener
+
+Step 0: user drags a PDF résumé into the web page (no traditional UI beyond a single drop-zone).
+
+Agent (speech):
+“Résumé received. Hi Ananya, what aspect would you like feedback on first?”
+
+User (voice):
+“Focus on improving my summary statement.”
+
+Agent:
+“Your current summary reads: ‘Dedicated software engineer with experience in full-stack development.’ It’s vague. Try:
+‘Full-stack engineer with 3+ years building React and Node.js products used by 200 k+ customers; passionate about performance and accessibility.’
+Shall I insert that for you?”
+
+User:
+“Yes, replace it.”
+
+Agent:
+“Done. Anything else?”
+
+User:
+“Are there redundant keywords?”
+
+Agent:
+“I see ‘team player’ and ‘hard-working’ repeated in both skills and experience sections. These filler phrases add no value. Recommend deleting them and emphasizing quantifiable impact instead. Want me to highlight the lines?”
+
+User:
+“Highlight, please.”
+
+Agent:
+“I’ve marked the two lines in yellow. Let me know when you’re ready for a fresh PDF.”
+
+User:
+“Generate the updated PDF.”
+
+Agent:
+“New résumé exported. I’ve saved the before-and-after versions in your drafts folder. Good luck with your applications!”

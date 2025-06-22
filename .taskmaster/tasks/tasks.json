@@ -1,0 +1,431 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Setup Project Repository and Initial Environment",
+        "description": "Initialize project repository and set up basic development environment with required tech stack.",
+        "details": "Create a new repository. Set up Node.js environment. Install dependencies: pdf.js for PDF parsing, a speech synthesis library (e.g., Web Speech API), and any required frameworks. Initialize IndexedDB for future use. Create a basic README and project structure.",
+        "testStrategy": "Verify repository setup, dependency installation, and environment readiness by running a simple test script or build command.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Project Repository and Initialize Version Control",
+            "description": "Set up a new Git repository for the project, configure .gitignore, and create an initial commit with a basic README.",
+            "dependencies": [],
+            "details": "Create a new directory for the project. Initialize Git using `git init`. Add a .gitignore file to exclude node_modules and other unnecessary files. Write a basic README.md outlining the project purpose and tech stack. Make the initial commit to the repository.",
+            "status": "done",
+            "testStrategy": "Verify repository is initialized, .gitignore is effective, and README is present by cloning the repo to a new location and checking file structure."
+          },
+          {
+            "id": 2,
+            "title": "Set Up Node.js Environment and Install Dependencies",
+            "description": "Initialize a Node.js project and install required dependencies: React, pdf.js, and any speech synthesis libraries.",
+            "dependencies": [],
+            "details": "Run `npm init -y` to create package.json. Install React and ReactDOM using `npm install react react-dom`. Install pdf.js with `npm install pdfjs-dist`. For speech synthesis, plan to use the Web Speech API (native to browsers), but install any polyfills if needed. Add any additional dependencies required for development (e.g., testing libraries).",
+            "status": "deferred",
+            "testStrategy": "Run `npm install` to ensure all dependencies are installed. Check that `node_modules` and `package.json` reflect the correct packages."
+          },
+          {
+            "id": 3,
+            "title": "Establish Project Structure and Basic React App",
+            "description": "Create the initial folder structure and scaffold a basic React application.",
+            "dependencies": [],
+            "details": "Set up directories such as `src/`, `public/`, and `components/`. Create an `index.html` in `public/` and an `index.js` in `src/` to bootstrap the React app. Ensure the app renders a placeholder component. Update README with instructions to run the app.",
+            "status": "done",
+            "testStrategy": "Run the development server (e.g., `npm start`) and verify the React app loads successfully in the browser."
+          },
+          {
+            "id": 4,
+            "title": "Initialize IndexedDB Integration for Future Use",
+            "description": "Set up a basic IndexedDB schema and utility functions to prepare for future data storage needs.",
+            "dependencies": [],
+            "details": "Create a utility module in `src/` for IndexedDB interactions. Define a schema with at least one object store (e.g., for storing PDF metadata or user preferences). Implement basic open, read, and write functions. Document usage in the README.",
+            "status": "done",
+            "testStrategy": "Write a simple test to open the database, add a record, and retrieve it, verifying correct IndexedDB setup in the browser."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Implement PDF Upload and Parsing",
+        "description": "Enable users to upload PDF résumés and parse content using pdf.js.",
+        "details": "Create a single drop-zone UI for PDF upload. Use pdf.js to extract text from uploaded PDFs. Store parsed text in memory for further processing. Handle errors for invalid or corrupted files.",
+        "testStrategy": "Test with various PDF résumés, including edge cases (empty, corrupted, or non-PDF files). Verify text extraction accuracy.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Install and Configure PDF.js in React Project",
+            "description": "Set up the React project with pdf.js and all necessary dependencies to enable PDF parsing and viewing.",
+            "dependencies": [],
+            "details": "Install the 'pdfjs-dist' package using npm or yarn. Configure the PDF.js worker by copying the worker script to the public directory and setting the workerSrc in your React app. Ensure the development environment is ready with Node.js and React. Optionally, consider using a wrapper like 'react-pdf' or 'pdfjs-react' for easier integration.",
+            "status": "done",
+            "testStrategy": "Verify that the PDF.js worker loads without errors and that a sample PDF can be rendered in a basic React component."
+          },
+          {
+            "id": 2,
+            "title": "Implement PDF Upload Drop-Zone Component",
+            "description": "Create a React component that provides a drag-and-drop area for users to upload PDF files.",
+            "dependencies": [],
+            "details": "Build a drop-zone UI using a library like 'react-dropzone' or custom HTML5 drag-and-drop events. Restrict accepted file types to PDFs. On file drop or selection, validate the file type and size. Display appropriate UI feedback for drag-over, upload progress, and errors.",
+            "status": "done",
+            "testStrategy": "Test by dragging and dropping valid and invalid files, ensuring only PDFs are accepted and errors are shown for unsupported files."
+          },
+          {
+            "id": 3,
+            "title": "Parse Uploaded PDF and Extract Text Content",
+            "description": "Use pdf.js to read the uploaded PDF file and extract its text content for further processing.",
+            "dependencies": [],
+            "details": "On successful upload, use pdf.js APIs to load the PDF file in the browser. Iterate through each page and extract text content using the getTextContent() method. Concatenate the extracted text and store it in memory (e.g., React state or context) for downstream use.",
+            "status": "done",
+            "testStrategy": "Upload sample PDFs and verify that the extracted text matches the document content. Test with multi-page and complex PDFs."
+          },
+          {
+            "id": 4,
+            "title": "Handle Errors and Edge Cases for PDF Upload and Parsing",
+            "description": "Implement robust error handling for invalid, corrupted, or unsupported PDF files during upload and parsing.",
+            "dependencies": [],
+            "details": "Detect and handle errors such as unsupported file types, corrupted PDFs, and parsing failures. Display user-friendly error messages in the UI. Ensure the app does not crash on malformed files and provides clear feedback for retrying or selecting a different file.",
+            "status": "done",
+            "testStrategy": "Test with intentionally corrupted, encrypted, or non-PDF files to ensure errors are caught and appropriate messages are displayed."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Design Conversational Agent Core Logic",
+        "description": "Develop the core logic for the conversational agent that interacts with users.",
+        "details": "Implement a state machine or event-driven logic to manage conversation flow. Use GPT-based prompts to generate actionable feedback on résumé content. Handle user voice/text input and agent responses.",
+        "testStrategy": "Test conversation flow with mock user inputs. Validate agent responses for correctness and relevance.",
+        "priority": "high",
+        "dependencies": [
+          2
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Conversation State Machine",
+            "description": "Design and implement a state machine or event-driven logic to manage the flow of conversation between the user and the agent.",
+            "dependencies": [],
+            "details": "Create a modular state machine in JavaScript/TypeScript that defines conversation states (e.g., greeting, input collection, feedback, clarification) and transitions based on user input or system events. Integrate this logic into a React context or service to manage state globally. Ensure extensibility for future conversation flows.",
+            "status": "done",
+            "testStrategy": "Write unit tests for state transitions and edge cases using Jest or React Testing Library."
+          },
+          {
+            "id": 2,
+            "title": "Integrate GPT-Based Feedback Generation",
+            "description": "Set up logic to generate actionable résumé feedback using GPT-based prompts, triggered by relevant conversation states.",
+            "dependencies": [
+              1
+            ],
+            "details": "Connect to the OpenAI API or a local GPT model. Define prompt templates for résumé feedback. Implement functions that send user résumé content to the model and parse the response for actionable feedback. Ensure error handling and fallback messaging for API failures.",
+            "status": "done",
+            "testStrategy": "Mock GPT responses and verify correct prompt construction, API calls, and feedback parsing."
+          },
+          {
+            "id": 3,
+            "title": "Handle User Input via Voice and Text",
+            "description": "Implement logic to accept and process both voice and text input from users, integrating with the conversation state machine.",
+            "dependencies": [
+              1
+            ],
+            "details": "Use the Web Speech API for voice recognition and standard React input components for text. Normalize input events and route them to the state machine. Provide real-time feedback on input status (e.g., listening, transcribing, received).",
+            "status": "done",
+            "testStrategy": "Test with various voice and text inputs, including edge cases like silence, interruptions, and rapid input switching."
+          },
+          {
+            "id": 4,
+            "title": "Generate and Deliver Agent Responses",
+            "description": "Implement logic to generate agent responses (text and optional voice) based on conversation state and GPT feedback, and deliver them to the user.",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Format agent responses for display in the React UI. Use the Web Speech API for voice synthesis if voice output is enabled. Ensure responses are contextually appropriate and update the conversation state accordingly.",
+            "status": "pending",
+            "testStrategy": "Verify response accuracy, UI rendering, and voice output across different conversation scenarios."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Integrate Speech Synthesis and Voice Interaction",
+        "description": "Enable agent to speak feedback and support user voice input.",
+        "details": "Integrate Web Speech API or similar for speech synthesis. Support voice input via browser APIs. Ensure agent responses are spoken aloud and user voice is captured and transcribed.",
+        "testStrategy": "Test speech synthesis and voice recognition with different browsers and devices. Verify clarity and accuracy of spoken feedback.",
+        "priority": "medium",
+        "dependencies": [
+          3
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Set Up Speech Synthesis Functionality",
+            "description": "Implement speech synthesis using the Web Speech API to enable the agent to speak feedback aloud in the web app.",
+            "dependencies": [],
+            "details": "Create a React utility or hook that leverages the SpeechSynthesis API. Ensure the agent's text responses are converted to speech using SpeechSynthesisUtterance. Integrate this into the agent's response flow so every feedback message is spoken automatically. Provide controls for play, pause, and stop if needed.",
+            "status": "done",
+            "testStrategy": "Verify that agent responses are spoken aloud in various browsers. Test with different response lengths and edge cases (e.g., empty strings, special characters)."
+          },
+          {
+            "id": 2,
+            "title": "Implement Voice Input Capture and Transcription",
+            "description": "Enable user voice input by integrating speech recognition via the Web Speech API, capturing and transcribing spoken input in the React app.",
+            "dependencies": [],
+            "details": "Create a React component or hook that initializes SpeechRecognition (window.SpeechRecognition or window.webkitSpeechRecognition). Set up event listeners for result and error events. Capture the user's spoken input, transcribe it to text, and update the UI with the transcript. Provide UI controls to start and stop listening.",
+            "status": "done",
+            "testStrategy": "Test voice input in supported browsers. Confirm accurate transcription and error handling for unsupported browsers or microphone issues."
+          },
+          {
+            "id": 3,
+            "title": "Integrate Voice Interaction with Agent Workflow",
+            "description": "Connect the speech synthesis and recognition components to the agent's main workflow, ensuring seamless voice-based interaction.",
+            "dependencies": [],
+            "details": "Modify the agent's input and output logic so that user voice input is processed as agent queries, and agent responses are both displayed and spoken aloud. Ensure the transcript is sent to the agent backend or logic handler. Handle edge cases such as overlapping speech, interruptions, and fallback to text input if needed.",
+            "status": "done",
+            "testStrategy": "Simulate full voice interaction cycles: user speaks, agent responds aloud. Test with rapid input, interruptions, and fallback scenarios."
+          },
+          {
+            "id": 4,
+            "title": "Add Accessibility and User Controls for Voice Features",
+            "description": "Enhance usability by providing clear UI controls and accessibility features for speech synthesis and recognition.",
+            "dependencies": [],
+            "details": "Add buttons or toggles for enabling/disabling voice input and output. Provide visual feedback (e.g., microphone active indicator, speech playback progress). Ensure keyboard accessibility and ARIA labels for all controls. Document browser compatibility and provide fallback messaging for unsupported environments.",
+            "status": "pending",
+            "testStrategy": "Test all controls with keyboard navigation and screen readers. Verify that users can enable/disable voice features and receive appropriate feedback."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Implement Résumé Editing and Versioning",
+        "description": "Allow agent to suggest edits and persist versions in IndexedDB.",
+        "details": "Enable agent to propose and apply edits to résumé content. Persist original and edited versions in IndexedDB. Support undo/redo or version history.",
+        "testStrategy": "Test editing, versioning, and persistence. Verify that changes are saved and retrievable from IndexedDB.",
+        "priority": "medium",
+        "dependencies": [
+          2,
+          3
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Set Up IndexedDB Schema for Résumé Versioning",
+            "description": "Design and implement an IndexedDB schema to store original and edited résumé versions, supporting version history and efficient retrieval.",
+            "dependencies": [],
+            "details": "Use an IndexedDB wrapper (such as idb or Dexie.js) to define a store for résumés. Each résumé entry should include fields for version metadata (timestamp, version number, change summary), the résumé content (as JSON), and a unique identifier. Ensure the schema supports storing multiple versions per résumé and efficient querying for version history.",
+            "status": "done",
+            "testStrategy": "Write unit tests to verify that résumé versions can be added, retrieved, and listed in order. Test schema upgrades and data integrity."
+          },
+          {
+            "id": 2,
+            "title": "Implement React Components for Résumé Editing",
+            "description": "Create React components that allow agents to propose and apply edits to résumé content, integrating with pdf.js for rendering and editing.",
+            "dependencies": [
+              1
+            ],
+            "details": "Develop a résumé editor UI using React, enabling text and section edits. Integrate pdf.js to display the current résumé and highlight editable regions. Provide controls for agents to suggest changes, preview edits, and apply them. Ensure edits update the résumé state in memory.",
+            "status": "done",
+            "testStrategy": "Test that edits are reflected in the UI, changes can be previewed, and the résumé renders correctly after edits."
+          },
+          {
+            "id": 3,
+            "title": "Persist Edits and Versions in IndexedDB",
+            "description": "Implement logic to save each edit as a new version in IndexedDB, maintaining a complete version history and supporting undo/redo functionality.",
+            "dependencies": [
+              2
+            ],
+            "details": "On each applied edit, serialize the updated résumé and store it as a new version in IndexedDB. Implement undo/redo by traversing the version history and updating the editor state accordingly. Ensure that both the original and all subsequent versions are persisted and retrievable.",
+            "status": "pending",
+            "testStrategy": "Test that each edit creates a new version, undo/redo navigates versions correctly, and all versions persist after page reload."
+          },
+          {
+            "id": 4,
+            "title": "Display and Manage Résumé Version History",
+            "description": "Build a UI component to display résumé version history, allowing agents to view, compare, and restore previous versions.",
+            "dependencies": [
+              3
+            ],
+            "details": "Create a version history sidebar or modal in React that lists all saved versions with metadata (timestamp, summary). Allow agents to select a version to view or restore. Optionally, implement a diff view to compare changes between versions.",
+            "status": "pending",
+            "testStrategy": "Test that all versions appear in the history, selecting a version updates the editor, and restoring a version creates a new entry in the history."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Add Highlighting and Visual Feedback",
+        "description": "Provide visual feedback by highlighting suggested changes in the résumé.",
+        "details": "Implement UI logic to highlight lines or sections in the résumé as suggested by the agent. Use color coding or annotations for clarity.",
+        "testStrategy": "Test highlighting functionality with various résumé sections. Verify that highlights are accurate and visually clear.",
+        "priority": "medium",
+        "dependencies": [
+          5
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Integrate Highlighting Capability with PDF.js Text Layer",
+            "description": "Set up the ability to programmatically highlight text within the résumé PDF using PDF.js, ensuring the text layer is accessible for annotation.",
+            "dependencies": [],
+            "details": "Install and configure PDF.js in the React app. Ensure the text layer is rendered and accessible. Implement logic to identify and target specific text spans for highlighting, referencing PDF.js's text layer structure. Prepare utility functions to map suggested changes to corresponding text spans, considering multi-page and cross-span selections.",
+            "status": "pending",
+            "testStrategy": "Render a sample PDF and verify that text spans can be programmatically identified and manipulated for highlighting."
+          },
+          {
+            "id": 2,
+            "title": "Develop Highlight Rendering Logic and Color Coding",
+            "description": "Implement the logic to visually highlight suggested changes in the résumé, using color coding or annotations for clarity.",
+            "dependencies": [
+              1
+            ],
+            "details": "Create a React component or hook that receives suggested changes and applies highlights to the relevant text spans in the PDF.js text layer. Use CSS classes or inline styles to apply background colors or borders. Define a color scheme to differentiate types of suggestions (e.g., additions, deletions, modifications). Ensure highlights are visually distinct and accessible.",
+            "status": "pending",
+            "testStrategy": "Trigger highlights for various suggestion types and verify correct color coding and visual clarity in the UI."
+          },
+          {
+            "id": 3,
+            "title": "Implement Annotation and Feedback UI Elements",
+            "description": "Add UI elements such as tooltips or side annotations to provide additional context for each highlighted change.",
+            "dependencies": [
+              2
+            ],
+            "details": "Enhance the highlight feature by displaying tooltips or annotation popovers when users hover over or click highlighted text. Include details about the suggested change, such as the type of edit and agent comments. Ensure annotations are positioned correctly relative to the highlighted text and do not obstruct readability.",
+            "status": "pending",
+            "testStrategy": "Hover or click on highlighted sections and verify that the correct annotation or tooltip appears with relevant information."
+          },
+          {
+            "id": 4,
+            "title": "Synchronize Highlight State with IndexedDB and Agent Suggestions",
+            "description": "Ensure that highlights and visual feedback persist across sessions and are updated in response to new agent suggestions by integrating with IndexedDB.",
+            "dependencies": [
+              3
+            ],
+            "details": "Store highlight metadata (e.g., location, type, annotation) in IndexedDB. Update highlights in real-time as new suggestions are received from the agent. On app load, retrieve and re-apply highlights from IndexedDB to the PDF. Implement logic to handle highlight updates, removals, and conflicts.",
+            "status": "pending",
+            "testStrategy": "Simulate receiving new suggestions, reload the app, and verify that highlights persist and update correctly."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Enable PDF Export and Draft Management",
+        "description": "Allow users to export updated résumés and manage drafts.",
+        "details": "Implement PDF export functionality for edited résumés. Allow users to save and retrieve drafts from IndexedDB. Provide a simple UI for draft management.",
+        "testStrategy": "Test PDF export and draft retrieval. Verify exported files match edited content and drafts are correctly saved.",
+        "priority": "medium",
+        "dependencies": [
+          5
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Set Up PDF Export Functionality",
+            "description": "Implement the ability to export edited résumés as PDF files using pdf.js or react-pdf in the React application.",
+            "dependencies": [],
+            "details": "Install the necessary PDF library (e.g., pdfjs-react or react-pdf). Create a utility or service that takes résumé data and generates a PDF document. Integrate this export feature into the résumé editor UI, providing a clear export button. Ensure the generated PDF accurately reflects the latest résumé edits.",
+            "status": "pending",
+            "testStrategy": "Verify that exporting a résumé produces a correctly formatted PDF reflecting all recent changes. Test with various résumé content and layouts."
+          },
+          {
+            "id": 2,
+            "title": "Implement IndexedDB Draft Storage",
+            "description": "Enable saving and retrieving résumé drafts using IndexedDB for persistent client-side storage.",
+            "dependencies": [],
+            "details": "Set up an IndexedDB schema for storing résumé drafts. Create functions to save, update, retrieve, and delete drafts. Ensure data integrity and handle edge cases such as duplicate draft names or storage limits.",
+            "status": "pending",
+            "testStrategy": "Write unit tests for all IndexedDB operations. Manually test saving, updating, retrieving, and deleting drafts through the UI."
+          },
+          {
+            "id": 3,
+            "title": "Develop Draft Management UI Components",
+            "description": "Build React components for managing drafts, including listing, selecting, saving, loading, and deleting drafts.",
+            "dependencies": [],
+            "details": "Design and implement a user-friendly interface for draft management. Components should display a list of saved drafts, allow users to select a draft to load, save the current résumé as a new draft, and delete unwanted drafts. Ensure UI updates reflect changes in IndexedDB.",
+            "status": "pending",
+            "testStrategy": "Test UI interactions for all draft management actions. Confirm that UI state matches IndexedDB contents after each operation."
+          },
+          {
+            "id": 4,
+            "title": "Integrate PDF Export and Draft Management Workflows",
+            "description": "Ensure seamless integration between PDF export and draft management, allowing users to export any draft or the current résumé.",
+            "dependencies": [],
+            "details": "Connect the export functionality to the draft management UI, enabling users to export the currently loaded draft or the latest résumé version. Handle edge cases such as exporting unsaved changes or empty drafts. Provide user feedback for successful exports and errors.",
+            "status": "pending",
+            "testStrategy": "Perform end-to-end tests: save a draft, load it, make edits, and export as PDF. Validate that the exported PDF matches the loaded or edited draft."
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Polish UI/UX and Error Handling",
+        "description": "Refine user interface and improve error handling and user guidance.",
+        "details": "Enhance drop-zone UI for better user experience. Add clear error messages and help text. Ensure accessibility and responsiveness.",
+        "testStrategy": "Test UI with different devices and screen sizes. Validate error handling and user guidance.",
+        "priority": "low",
+        "dependencies": [
+          2,
+          7
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Redesign Drop-Zone UI for Enhanced Usability",
+            "description": "Revamp the drop-zone component to provide a more intuitive and visually appealing interface for uploading PDFs, ensuring clear affordances and feedback.",
+            "dependencies": [],
+            "details": "Update the drop-zone React component to include visual cues (e.g., highlight on drag-over, icons, and instructions). Ensure the component is keyboard-accessible and provides ARIA labels for screen readers. Use CSS to improve responsiveness and adapt layout for different screen sizes.",
+            "status": "pending",
+            "testStrategy": "Test drag-and-drop interactions, keyboard navigation, and responsiveness across devices and browsers."
+          },
+          {
+            "id": 2,
+            "title": "Implement Comprehensive Error Handling for PDF Loading",
+            "description": "Add robust error handling to the PDF loading process, displaying clear and actionable error messages for common issues such as corrupt files, network errors, or unsupported formats.",
+            "dependencies": [],
+            "details": "Utilize the onLoadError and onSourceError props in the React-PDF component to catch and handle errors. Display user-friendly error messages in the UI and provide suggestions for resolution. Log errors for debugging purposes. Ensure fallback UI is accessible and visually consistent.",
+            "status": "pending",
+            "testStrategy": "Simulate various error scenarios (e.g., invalid file, network failure) and verify that appropriate messages and fallback UI are shown."
+          },
+          {
+            "id": 3,
+            "title": "Add Contextual Help Text and User Guidance",
+            "description": "Provide clear, concise help text and tooltips throughout the UI to guide users in uploading and interacting with PDFs.",
+            "dependencies": [],
+            "details": "Add instructional text near the drop-zone and PDF viewer components. Implement tooltips for key actions and error states. Ensure all help text is accessible to screen readers and follows best practices for clarity and brevity.",
+            "status": "pending",
+            "testStrategy": "Verify that help text and tooltips are present, accurate, and accessible via keyboard and screen readers."
+          },
+          {
+            "id": 4,
+            "title": "Audit and Enhance Accessibility and Responsiveness",
+            "description": "Conduct a thorough accessibility audit and make necessary improvements to ensure the UI is fully usable with assistive technologies and responsive on all devices.",
+            "dependencies": [],
+            "details": "Use tools like axe or Lighthouse to identify accessibility issues. Address ARIA roles, keyboard navigation, color contrast, and focus management. Test and refine responsive layouts using CSS media queries and flexible units.",
+            "status": "pending",
+            "testStrategy": "Run automated accessibility tests, perform manual keyboard and screen reader checks, and test layout on multiple device sizes."
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "created": "2025-06-22T06:40:40.620Z",
+      "updated": "2025-06-22T07:12:24.370Z",
+      "description": "Tasks for master context"
+    }
+  }
+}
